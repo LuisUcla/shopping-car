@@ -10,6 +10,6 @@ export class TarjetaCategoriaComponent implements OnInit {
   @Input({ required: true }) categoria!: Categoria;
   
   ngOnInit(): void {
-    console.log(this.categoria)
+    
   }
 }
