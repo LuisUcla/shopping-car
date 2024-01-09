@@ -25,7 +25,7 @@ const routes: Routes = [
     component: PerfilComponent 
   },
   {
-    path: 'rubro', 
+    path: 'categoria/:id', 
     component: RubroComponent 
   },
   {

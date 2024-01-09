@@ -11,6 +11,6 @@ export class BuscarComponent implements OnInit {
   headerService = inject(HeaderService);
   
   ngOnInit(): void {
-    this.headerService.titulo.set('Busqueda de articulo')
+    this.headerService.titulo.set('Buscar articulo')
   }
 }

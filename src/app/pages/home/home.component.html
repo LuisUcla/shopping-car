@@ -1,1 +1,7 @@
-<p>home works!</p>
+<div class="categoriaContainer">
+    <app-tarjeta-categoria
+        [categoria]="categoria" 
+        *ngFor="let categoria of categorias"
+        (click)="categoriaDetail(categoria.id)"
+    ></app-tarjeta-categoria>
+</div>
