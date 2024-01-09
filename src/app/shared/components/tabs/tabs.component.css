@@ -22,5 +22,5 @@ svg {
 }
 
 .seleccionado {
-    background-color: rgba(180, 0, 159, 0.1231);
+    background-color: var(--color-primary);
 }
