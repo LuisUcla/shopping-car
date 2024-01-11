@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './components/header/header.component';
 import { TarjetaCategoriaComponent } from './components/tarjeta-categoria/tarjeta-categoria.component';
 import { TarjetaProductoComponent } from './components/tarjeta-producto/tarjeta-producto.component';
-import { TarjetaArticuloComponent } from './components/tarjeta-articulo/tarjeta-articulo.component';
+import { ContadorCantidadComponent } from './components/contador-cantidad/contador-cantidad.component';
 
 @NgModule({
     declarations: [
@@ -12,14 +12,15 @@ import { TarjetaArticuloComponent } from './components/tarjeta-articulo/tarjeta-
         HeaderComponent,
         TarjetaCategoriaComponent,
         TarjetaProductoComponent,
-        TarjetaArticuloComponent,
+        ContadorCantidadComponent
     ],
     imports: [CommonModule],
     exports: [
         TabsComponent,
         HeaderComponent,
         TarjetaCategoriaComponent,
-        TarjetaProductoComponent
+        TarjetaProductoComponent,
+        ContadorCantidadComponent
     ]
   })
 

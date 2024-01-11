@@ -17,7 +17,7 @@ const routes: Routes = [
     component: CarritoComponent 
   },
   {
-    path: 'articulo', 
+    path: 'articulo/:id', 
     component: ArticuloComponent 
   },
   {

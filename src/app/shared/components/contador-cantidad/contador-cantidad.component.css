@@ -1,0 +1,23 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--color-primary);
+    border-radius: 10px;
+    overflow: hidden;
+    height: 40px;
+}
+
+button {
+    width: 35px;
+    border: unset;
+    font-weight: bold;
+    background-color: var(--color-primary);
+    padding: 0 5px;
+}
+
+span {
+    line-height: 40px;
+    width: 30px;
+    text-align: center;
+    background-color: var(--color-primary-claro);
+}

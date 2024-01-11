@@ -1,6 +1,7 @@
 <div class="container-producto">
     <app-tarjeta-producto 
         *ngFor="let producto of productos"
-        [producto]="producto" 
-    ></app-tarjeta-producto>
+        [producto]="producto"
+        (click)="details(+producto.id)"
+    ></app-tarjeta-producto><!-- el '+' es para poner el id en tipo number ya que viene en string -->
 </div>
