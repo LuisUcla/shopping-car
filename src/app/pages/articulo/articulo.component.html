@@ -21,12 +21,12 @@
     
     <label for="notas"><strong>Notas:</strong></label>
     <div class="container-textarea">
-        <textarea name="notas" id="notas" rows="6"></textarea>
+        <textarea [(ngModel)]="notas" name="notas" id="notas" rows="6"></textarea>
     </div>
 
     <div class="cantidad-container">
         <label for="cantidad"><strong>Cantidad:</strong></label>
         <app-contador-cantidad (cantidadCambiada)="cantidad.set($event)"></app-contador-cantidad>
     </div>
-    <button>Agregar al Carrito</button>
+    <button (click)="agregarProducto()">Agregar al Carrito</button>
 </div>

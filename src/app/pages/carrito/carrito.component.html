@@ -1,1 +1,57 @@
-<p>carrito works!</p>
+<div class="tarjetas-container">
+    <div class="tarjeta-producto-container" *ngFor="let producto of carrito; index as i">
+        <div class="foto" [ngStyle]="{ 'background-image': 'url('+productosCarrito[i].fotoUrl+')' }">
+            <div>
+                <img *ngIf="productosCarrito[i].esVegano" src="../../../assets/icons/vegano.svg" alt="Apto vegano">
+                <img  *ngIf="productosCarrito[i].esCeliaco" src="../../../assets/icons/celiaco.png" alt="Apto celiaco">
+            </div>
+        </div>
+
+        <div class="content-centro">
+            <p class="strong">{{productosCarrito[i].nombre }}</p>
+            <p style="margin-bottom: 5px !important;" *ngIf="producto.notas != ''">{{ producto.notas }}</p>
+            <app-contador-cantidad 
+            [cantidadInicial]="producto.cantidad" 
+            (cantidadCambiada)="cambiarCantidad(producto.id, $event)"
+            ></app-contador-cantidad>
+        </div>
+
+        <div class="content-derecha">
+            <button id="borrar" (click)="eliminarProducto(producto.id)">
+                <img src="../../../assets/icons/borrar.png" alt="">
+            </button>
+            <p class="strong">${{ productosCarrito[i].precio }}</p>
+        </div>
+    </div>
+</div>
+
+<div class="flex-center">
+    <a class="mas" [routerLink]="['/']">+</a>
+</div>
+
+<section>
+    <h4>Direccion de envio</h4>
+    <div class="direccion">
+        <div>
+            <h4>calle 3</h4>
+            <p>san lorenzo santa fe</p>
+        </div>
+        <div class="edit">
+            <img src="../../../assets/icons/lapiz.png" alt="Editar">
+        </div>
+    </div>
+
+    <div class="resumen">
+        <div class="totales">
+            <p class="negrita">Subtotal</p>
+            <p>Delivery</p>
+            <p class="negrita">Total</p>
+        </div>
+        <div class="montos">
+            <p class="negrita">$<span>{{ subtotal }}</span></p>
+            <p>$<span>{{ delivery }}</span></p>
+            <p class="negrita">$<span>{{ total }}</span></p>
+        </div>
+    </div>
+    <button class="enviar">Enviar Mensaje</button>
+</section>

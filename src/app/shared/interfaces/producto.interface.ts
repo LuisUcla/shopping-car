@@ -1,7 +1,7 @@
 export interface Producto {
     id: number,
     nombre: string,
-    precio: string
+    precio: number
     fotoUrl: string;
     esVegano: boolean;
     esCeliaco: boolean;

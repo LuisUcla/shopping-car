@@ -22,7 +22,7 @@
       {
         "id": "2",
         "nombre":"Hamburguesa especial",
-        "precio": 0,
+        "precio": 1500,
         "esVegano":false,
         "esCeliaco":false,
         "ingredientes": ["Carne de ternera","Pan Brioche","Queso", "Tomate", "Lechuga"],
@@ -31,7 +31,7 @@
       {
         "id": "3",
         "nombre":"Hamburguesa vegana",
-        "precio": 0,
+        "precio": 1300,
         "esVegano":true,
         "esCeliaco":false,
         "ingredientes": ["Medallón a base de lentejas","Pan Brioche","Tomate"],
@@ -49,7 +49,7 @@
       {
         "id": "5",
         "nombre":"Hamburguesa americana",
-        "precio": 0,
+        "precio": 1500,
         "esVegano":false,
         "esCeliaco":false,
         "ingredientes": ["Carne de ternera","Pan Brioche","Queso","Salsa secreta BBQ", "Panceta"],

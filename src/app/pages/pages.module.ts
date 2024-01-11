@@ -7,7 +7,8 @@ import { CarritoComponent } from './carrito/carrito.component';
 import { RubroComponent } from './rubro/rubro.component';
 import { PerfilComponent } from './perfil/perfil.component';
 import { SharedModule } from '../shared/shared.module';
-import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
     declarations: [
@@ -18,7 +19,7 @@ import { BrowserModule } from '@angular/platform-browser';
         RubroComponent,
         PerfilComponent
     ],
-    imports: [CommonModule, SharedModule]
+    imports: [CommonModule, SharedModule, FormsModule, RouterModule]
   })
 
 export class PagesModule { }
