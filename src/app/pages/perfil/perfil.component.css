@@ -1,0 +1,31 @@
+* {
+    font-size: large;
+}
+
+form,form div {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+form {
+    margin: 5px;
+    gap: 20px;
+}
+
+ p {
+    margin: 0px;
+    color: red;
+    font-size: small;
+ }
+
+button {
+    height: 40px;
+    font-weight: bold;
+    background-color: var(--color-primary-claro);
+    border: 1px solid black;
+    border-radius: 15px;
+    &:disabled {
+        background-color: rgb(217, 217, 217);
+    }
+}

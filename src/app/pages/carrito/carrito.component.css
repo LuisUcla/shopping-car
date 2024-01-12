@@ -10,6 +10,7 @@
 }
 
 section{
+    margin-top: 20px !important;
     margin: 5px;
     /* font-size: larger; */
 }
@@ -28,14 +29,15 @@ section{
 
 .foto {
     width: 25%;
+    height: 80px;
     border-radius: 10px;
     background-color: aqua;
     background-size: cover;
     background-position: center;
     > div {
-        position: absolute;
-        bottom: 7px;
-        left: 7px;
+        height: 100%;
+        display: flex;
+        align-items: end;
         img {
             height: 20px;
             background-color: rgb(182, 255, 180);

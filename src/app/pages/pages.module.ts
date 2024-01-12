@@ -19,7 +19,12 @@ import { RouterModule } from '@angular/router';
         RubroComponent,
         PerfilComponent
     ],
-    imports: [CommonModule, SharedModule, FormsModule, RouterModule]
+    imports: [
+      CommonModule, 
+      SharedModule, 
+      FormsModule, 
+      RouterModule
+    ]
   })
 
 export class PagesModule { }

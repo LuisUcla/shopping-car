@@ -27,9 +27,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.getCategorias();
   }
 
-  categoriaDetail(id: number) {
-    console.log("id: ", id)
-    
+  categoriaDetail(id: number) {    
     // navegacion a la vista de categorias
     this.router.navigate(['/categoria', id])
 

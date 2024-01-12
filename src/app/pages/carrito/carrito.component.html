@@ -33,11 +33,18 @@
     <h4>Direccion de envio</h4>
     <div class="direccion">
         <div>
-            <h4>calle 3</h4>
-            <p>san lorenzo santa fe</p>
+            @if (perfilService.perfil()){
+                <h4>{{ perfilService.perfil()?.nombre }}</h4>
+                <p>{{ perfilService.perfil()?.direccion}} - {{ perfilService.perfil()?.telefono }}</p>
+                <p>{{ perfilService.perfil()?.detalleEntrega }}</p>
+            } @else {
+                <p>Ingresa tus datos de envio</p>
+            }
         </div>
         <div class="edit">
-            <img src="../../../assets/icons/lapiz.png" alt="Editar">
+            <a [routerLink]="['/perfil']">
+                <img src="../../../assets/icons/lapiz.png" alt="Editar">
+            </a>
         </div>
     </div>
 

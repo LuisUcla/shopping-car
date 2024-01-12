@@ -1,9 +1,10 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { HeaderService } from '../../shared/services/header.service';
 import { CarService } from '../../shared/services/car.service';
 import { Cart } from '../../shared/interfaces/carrito.interface';
 import { Producto } from '../../shared/interfaces/producto.interface';
 import { ProductoService } from '../../shared/services/producto.service';
+import { PerfilService } from '../../shared/services/perfil-service.service';
 
 @Component({
   selector: 'app-carrito',
@@ -24,7 +25,8 @@ export class CarritoComponent implements OnInit {
   constructor(
     private headerService: HeaderService,
     private cartService: CarService,
-    private productoService: ProductoService
+    private productoService: ProductoService,
+    public perfilService: PerfilService
   ) {}
   
   ngOnInit(): void {
