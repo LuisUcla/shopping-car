@@ -1,64 +1,95 @@
-<div class="tarjetas-container">
-    <div class="tarjeta-producto-container" *ngFor="let producto of carrito; index as i">
-        <div class="foto" [ngStyle]="{ 'background-image': 'url('+productosCarrito[i].fotoUrl+')' }">
-            <div>
-                <img *ngIf="productosCarrito[i].esVegano" src="../../../assets/icons/vegano.svg" alt="Apto vegano">
-                <img  *ngIf="productosCarrito[i].esCeliaco" src="../../../assets/icons/celiaco.png" alt="Apto celiaco">
+@defer(when carrito.length){
+    @if (carrito.length) {
+        <div class="tarjetas-container">
+            <div class="tarjeta-producto-container" *ngFor="let producto of carrito; index as i">
+                <div class="foto" [ngStyle]="{ 'background-image': 'url('+productosCarrito[i].fotoUrl+')' }">
+                    <div>
+                        <img *ngIf="productosCarrito[i].esVegano" src="../../../assets/icons/vegano.svg" alt="Apto vegano">
+                        <img  *ngIf="productosCarrito[i].esCeliaco" src="../../../assets/icons/celiaco.png" alt="Apto celiaco">
+                    </div>
+                </div>
+        
+                <div class="content-centro">
+                    <p class="strong">{{productosCarrito[i].nombre }}</p>
+                    <p style="margin-bottom: 5px !important;" *ngIf="producto.notas != ''">{{ producto.notas }}</p>
+                    <app-contador-cantidad 
+                    [cantidadInicial]="producto.cantidad" 
+                    (cantidadCambiada)="cambiarCantidad(producto.id, $event)"
+                    ></app-contador-cantidad>
+                </div>
+        
+                <div class="content-derecha">
+                    <button id="borrar" (click)="eliminarProducto(producto.id)">
+                        <img src="../../../assets/icons/borrar.png" alt="">
+                    </button>
+                    <p class="strong">${{ productosCarrito[i].precio }}</p>
+                </div>
             </div>
         </div>
-
-        <div class="content-centro">
-            <p class="strong">{{productosCarrito[i].nombre }}</p>
-            <p style="margin-bottom: 5px !important;" *ngIf="producto.notas != ''">{{ producto.notas }}</p>
-            <app-contador-cantidad 
-            [cantidadInicial]="producto.cantidad" 
-            (cantidadCambiada)="cambiarCantidad(producto.id, $event)"
-            ></app-contador-cantidad>
+        
+        <div class="flex-center">
+            <a class="mas" [routerLink]="['/']">+</a>
         </div>
-
-        <div class="content-derecha">
-            <button id="borrar" (click)="eliminarProducto(producto.id)">
-                <img src="../../../assets/icons/borrar.png" alt="">
-            </button>
-            <p class="strong">${{ productosCarrito[i].precio }}</p>
+        
+        <section>
+            <h4>Direccion de envio</h4>
+            <div class="direccion">
+                <div>
+                    @if (perfilService.perfil()){
+                        <h4>{{ perfilService.perfil()?.nombre }}</h4>
+                        <p>{{ perfilService.perfil()?.direccion}} - {{ perfilService.perfil()?.telefono }}</p>
+                        <p>{{ perfilService.perfil()?.detalleEntrega }}</p>
+                    } @else {
+                        <p>Ingresa tus datos de envio</p>
+                    }
+                </div>
+                <div class="edit">
+                    <a [routerLink]="['/perfil']">
+                        <img src="../../../assets/icons/lapiz.png" alt="Editar">
+                    </a>
+                </div>
+            </div>
+        
+            <div class="resumen">
+                <div class="totales">
+                    <p class="negrita">Subtotal</p>
+                    <p>Delivery</p>
+                    <p class="negrita">Total</p>
+                </div>
+                <div class="montos">
+                    <p class="negrita">$<span>{{ subtotal }}</span></p>
+                    <p>$<span>{{ delivery }}</span></p>
+                    <p class="negrita">$<span>{{ total }}</span></p>
+                </div>
+            </div>
+            <button class="enviar" (click)="enviarMjs()">Enviar Mensaje</button>
+        </section>
+    } @else {
+        <div style="text-align: center;">
+            <h2 >No hay productos en el carrito</h2>
         </div>
+    }
+}@loading (minimum 500ms){
+    <div style="text-align: center;">
+
+        <span class="loader"></span>
     </div>
-</div>
+}
 
-<div class="flex-center">
-    <a class="mas" [routerLink]="['/']">+</a>
-</div>
 
-<section>
-    <h4>Direccion de envio</h4>
-    <div class="direccion">
-        <div>
-            @if (perfilService.perfil()){
-                <h4>{{ perfilService.perfil()?.nombre }}</h4>
-                <p>{{ perfilService.perfil()?.direccion}} - {{ perfilService.perfil()?.telefono }}</p>
-                <p>{{ perfilService.perfil()?.detalleEntrega }}</p>
-            } @else {
-                <p>Ingresa tus datos de envio</p>
-            }
-        </div>
-        <div class="edit">
-            <a [routerLink]="['/perfil']">
-                <img src="../../../assets/icons/lapiz.png" alt="Editar">
-            </a>
-        </div>
+
+<!-- =========== modal ================ -->
+<dialog method="modal" #dialog>
+    <h2>¿Pudiste realizar el envío?</h2>
+    <div>
+        <button (click)="finalizarPedido()">
+            <h2>Si</h2>
+            <span>Reiniciar Pedido</span>
+        </button>
+        <button (click)="editarPedido()">
+            <h2>No</h2>
+            <span>Editar Pedido</span>
+        </button>
     </div>
+</dialog>
 
-    <div class="resumen">
-        <div class="totales">
-            <p class="negrita">Subtotal</p>
-            <p>Delivery</p>
-            <p class="negrita">Total</p>
-        </div>
-        <div class="montos">
-            <p class="negrita">$<span>{{ subtotal }}</span></p>
-            <p>$<span>{{ delivery }}</span></p>
-            <p class="negrita">$<span>{{ total }}</span></p>
-        </div>
-    </div>
-    <button class="enviar">Enviar Mensaje</button>
-</section>

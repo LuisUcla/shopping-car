@@ -1,8 +1,9 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, signal } from '@angular/core';
 import { HeaderService } from '../../shared/services/header.service';
 import { Busqueda } from '../../shared/interfaces/busqueda.interface';
 import { ProductoService } from '../../shared/services/producto.service';
 import { Producto } from '../../shared/interfaces/producto.interface';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-buscar',
@@ -11,10 +12,12 @@ import { Producto } from '../../shared/interfaces/producto.interface';
 })
 export class BuscarComponent implements OnInit {
   productos: Producto[] = [];
-  data: Producto[] = []
+  data: Producto[] = [];
+  cargando = signal(true);
  
   headerService = inject(HeaderService);
-  productoService = inject(ProductoService)
+  productoService = inject(ProductoService);
+  router = inject(Router)
 
   parametrosBusqueda: Busqueda = {
     texto: '',
@@ -28,14 +31,16 @@ export class BuscarComponent implements OnInit {
   }
 
   getAll() {
-    this.productoService.getAll().subscribe(data => {
-      data.forEach((element: any) => {
-        for (let el of element) {
-          this.data = [...this.data, el];
-          this.productos = [...this.productos, el]
-        }
+    this.cargando.set(true);
+      this.productoService.getAll().subscribe(data => {
+        data.forEach((element: any) => {
+          for (let el of element) {
+            this.data = [...this.data, el];
+            this.productos = [...this.productos, el]
+          }
+        });
+        this.cargando.set(false);
       });
-    });
   }
 
   buscar() {
@@ -57,5 +62,9 @@ export class BuscarComponent implements OnInit {
       }
       return false;
     });
+  }
+
+  details(id: number) {
+    this.router.navigate([`/articulo/${id}`])
   }
 }

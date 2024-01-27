@@ -137,3 +137,30 @@ p, h4{
     width: 40px;
     justify-content: center;
 }
+
+dialog {
+    background-color: var(--color-primary-claro);
+    border-radius: 10px;
+    border: unset;
+    box-shadow: 0 0 5px rgba(0,0,0,0.156);
+    & button {
+        width: 100px;
+        height: 80px;
+        cursor: pointer;
+        border: 1px black solid;
+        border-radius: 10px;
+        & h2 {
+            margin: 0px;
+        }
+        &:first-of-type {
+            background-color: rgb(211, 255, 211);
+        }
+        &:last-of-type {
+            background-color: rgb(255, 211, 211);
+        }
+    }
+    & div {
+        display: flex;
+        justify-content: space-around;
+    }
+}

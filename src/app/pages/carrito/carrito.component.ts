@@ -1,10 +1,11 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import { HeaderService } from '../../shared/services/header.service';
 import { CarService } from '../../shared/services/car.service';
 import { Cart } from '../../shared/interfaces/carrito.interface';
 import { Producto } from '../../shared/interfaces/producto.interface';
 import { ProductoService } from '../../shared/services/producto.service';
 import { PerfilService } from '../../shared/services/perfil-service.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-carrito',
@@ -12,6 +13,8 @@ import { PerfilService } from '../../shared/services/perfil-service.service';
   styleUrl: './carrito.component.css'
 })
 export class CarritoComponent implements OnInit {
+
+  @ViewChild('dialog') dialog!: ElementRef<HTMLDialogElement>; // elemento para usar modal
   
   carrito: Cart[] = [];
 
@@ -26,7 +29,8 @@ export class CarritoComponent implements OnInit {
     private headerService: HeaderService,
     private cartService: CarService,
     private productoService: ProductoService,
-    public perfilService: PerfilService
+    public perfilService: PerfilService,
+    private router: Router
   ) {}
   
   ngOnInit(): void {
@@ -90,4 +94,36 @@ export class CarritoComponent implements OnInit {
     }
   }
 
+  async enviarMjs() {
+    let pedido = ''
+    for (let i = 0; i < this.cartService.carrito.length; i++) {
+      const producto = await this.getById(this.cartService.carrito[i].id)
+      pedido += `* ${this.cartService.carrito[i].cantidad} X ${producto?.nombre}
+`
+    }
+    const mensaje = `
+hola soy ${this.perfilService.perfil()?.nombre} y quiero hacer el siguiente pedido:
+
+${pedido}
+si quieres comunicarte conmigo, al numero <b>${this.perfilService.perfil()?.telefono}</b>
+la dirección del envío es: ${this.perfilService.perfil()?.direccion}
+Muchas gracias...`
+
+    const link = `https://wa.me/+584160255073?text=${encodeURI(mensaje)}`
+    //window.open(link,"_blank");
+    this.dialog.nativeElement.showModal(); // muestra el modal
+  }
+
+  finalizarPedido() {
+    this.cartService.vaciar();
+    //this.carrito = this.cartService.getCarrito();
+    this.dialog.nativeElement.close();
+
+    this.router.navigate(['/'])
+
+  }
+
+  editarPedido() {
+    this.dialog.nativeElement.close();
+  }
 }
